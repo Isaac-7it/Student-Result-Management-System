@@ -13,22 +13,22 @@ include_once '../Controllers/SignUp.php';
                 <div class="flex flex-col">
                     <label for="firstname" class="text-label font-medium">First Name</label>
                     <input class="border-2 p-xsm border-grey rounded-input" type="text" id="firstname" name="firstname" value="<?= $newSignUp -> firstName ?>">
-                    <span><?= implode("<br>", $newSignUp -> firstNameErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> firstNameErrors) ?></span>
                 </div>
                 <div class="flex flex-col">
                     <label for="middlename" class="text-label font-medium">Middle Name</label>
                     <input class="border-2 p-xsm border-grey rounded-input" type="text" id="middlename" name="middlename" value="<?= $newSignUp -> middleName ?>">
-                    <span><?= implode("<br>", $newSignUp -> middleNameErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> middleNameErrors) ?></span>
                 </div>
                 <div class="flex flex-col">
                     <label for="lastname" class="text-label font-medium">Last Name</label>
                     <input class="border-2 p-xsm border-grey rounded-input" type="text" id="lastname" name="lastname" value="<?= $newSignUp -> lastName ?>">
-                    <span><?= implode("<br>", $newSignUp -> lastNameErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> lastNameErrors) ?></span>
                 </div>
                 <div class="flex flex-col">
                     <label for="matric_number" class="text-label font-medium">Matric no</label>
                     <input class="border-2 p-xsm border-grey rounded-input" type="text" id="matric_number" name="matric_number" value="<?= $newSignUp -> matricNumber ?>">
-                    <span><?= implode("<br>", $newSignUp -> matricErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> matricErrors) ?></span>
                 </div>
                 <div class="flex flex-col">
                     <label for="pass" class="text-label font-medium">Password</label>
@@ -37,7 +37,7 @@ include_once '../Controllers/SignUp.php';
                 <div class="flex flex-col">
                     <label for="retyped-pass" class="text-label font-medium">Retype Password</label>
                     <input class="border-2 p-xsm border-grey rounded-input" type="password" id="retyped-pass" name="retyped_pass" value="<?= $newSignUp -> retypedPassword ?>">
-                    <span><?= implode("<br>", $newSignUp -> passErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> passErrors) ?></span>
                 </div>
                 <div class="flex flex-col">
                     <label for="department" class="text-label font-medium">Department</label>
@@ -50,7 +50,7 @@ include_once '../Controllers/SignUp.php';
                         <option value="csc">Computer Science</option>
                         <option value="zoology">Zoology</option>
                     </select>
-                    <span><?= implode("<br>", $newSignUp -> departmentErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> departmentErrors) ?></span>
                 </div>
                 <div class="">
                     <div class="flex justify-between">
@@ -66,9 +66,9 @@ include_once '../Controllers/SignUp.php';
                             <input class="" type="radio" id="de" value="de" name="status">
                         </div>
                     </div>
-                    <span><?= implode("<br>", $newSignUp -> statusErrors) ?></span>
+                    <span class="text-red-600"><?= implode("<br>", $newSignUp -> statusErrors) ?></span>
                 </div>
-                <span class="text-red-600"><?= $newSignUp -> requiredError ?></span>
+                <span class="text-red-600"><?= implode("<br>", $newSignUp -> requiredError) ?></span>
             </div>
             <div class="mb-xmd">
                 <button type="submit" class="w-full bg-primary px-sm py-xsm rounded-input text-white">Sign Up</button>

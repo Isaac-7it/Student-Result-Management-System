@@ -18,11 +18,10 @@ class SignUp {
     public $passErrors = [];
     public $statusErrors = [];
     public $departmentErrors = [];
-    public $requiredError;
+    public $requiredError = [];
 
     public function __construct() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            print_r($_POST);
             $varExist = isset($_POST['firstname']) && isset($_POST['middlename']) && isset($_POST['lastname']) && isset($_POST['matric_number']) && isset($_POST['pass']) && isset($_POST['status']) && isset($_POST['department']);
 
             if($varExist) {
@@ -34,6 +33,8 @@ class SignUp {
                 $this -> department = htmlspecialchars(trim($_POST['department']));
                 $this -> status = htmlspecialchars(trim($_POST['status']));
                 $this -> retypedPassword = htmlspecialchars(trim($_POST['retyped_pass']));
+
+                $allEmpty = empty($this -> firstName) && empty($this -> lastName) && empty($this -> matricNumber) && empty($this -> status) && empty($this -> password) && $this -> department === 'none';
 
             
                 if(empty($this -> firstName)) {
@@ -52,14 +53,20 @@ class SignUp {
                     $this -> passErrors[] = "Password is requred";
                 } elseif($this -> password !== $this -> retypedPassword) {
                     $this -> passErrors[] = "Passwords do not match!";
+                } elseif($allEmpty) {
+                    $this -> requiredError[] = 'All fields are required';
                 } else {
                     $db = new Database();
                     $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
-                    $db -> insertStudentTable($this -> firstName, $this -> middleName, $this -> lastName, $this -> matricNumber, $this -> password, $this -> department, $this -> status);
+                    $matchingStudent = $db -> fetchStudentData($this -> matricNumber);
+
+                    if(count($matchingStudent) === 0) {
+                        $db -> insertStudentTable($this -> firstName, $this -> middleName, $this -> lastName, $this -> matricNumber, $this -> password, $this -> department, $this -> status);
+                    } else {
+                        $this -> requiredError[] = 'User already exist. Proceed to login';
+                    }
                 }
 
-            } else {
-                $this -> requiredError = 'All fields are required';
             }
         }
     }

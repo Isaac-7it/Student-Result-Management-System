@@ -7,6 +7,7 @@ class Database {
     public function connectDatabase($dbHost, $dbPort, $dbName, $dbUser, $dbPass) {
             $this -> db = new PDO("mysql:host={$dbHost}; port={$dbPort}; dbname={$dbName}", $dbUser, $dbPass);
             $this -> db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this -> db;
     }
 
     public function createStudentDetails() {
@@ -56,10 +57,26 @@ class Database {
         $lastInsertedRowId = $this -> db -> lastInsertId();
 
         if($lastInsertedRowId > 0) {
-            echo "OK";
+            return "OK";
         } else {
-            echo "Failed!";
+            return "Failed!";
         }
+    }
+
+    public function fetchStudentData($key) {
+        $selectQuery = "SELECT * 
+        FROM `students` 
+        WHERE matric=:matric";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(":matric", $key, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
     }
 
     public function updateStudentTable() {
