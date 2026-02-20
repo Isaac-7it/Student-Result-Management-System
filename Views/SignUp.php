@@ -32,11 +32,11 @@ include_once '../Controllers/SignUp.php';
                 </div>
                 <div class="flex flex-col">
                     <label for="pass" class="text-label font-medium">Password</label>
-                    <input class="border-2 p-xsm border-grey rounded-input" type="text" id="pass" name="pass" value="<?= $newSignUp -> password ?>">
+                    <input class="border-2 p-xsm border-grey rounded-input" type="password" id="pass" name="pass" value="<?= $newSignUp -> password ?>">
                 </div>
                 <div class="flex flex-col">
                     <label for="retyped-pass" class="text-label font-medium">Retype Password</label>
-                    <input class="border-2 p-xsm border-grey rounded-input" type="text" id="retyped-pass" name="retyped_pass" value="<?= $newSignUp -> retypedPassword ?>">
+                    <input class="border-2 p-xsm border-grey rounded-input" type="password" id="retyped-pass" name="retyped_pass" value="<?= $newSignUp -> retypedPassword ?>">
                     <span><?= implode("<br>", $newSignUp -> passErrors) ?></span>
                 </div>
                 <div class="flex flex-col">

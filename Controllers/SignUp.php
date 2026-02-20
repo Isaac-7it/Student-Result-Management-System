@@ -1,4 +1,5 @@
 <?php
+include_once '../Models/Database.php';
 
 class SignUp {
     public $firstName;
@@ -20,6 +21,7 @@ class SignUp {
 
     public function __construct() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            print_r($_POST);
             $varExist = isset($_POST['firstname']) && isset($_POST['middlename']) && isset($_POST['lastname']) && isset($_POST['matric_number']) && isset($_POST['pass']) && isset($_POST['status']) && isset($_POST['department']);
 
             if($varExist) {
@@ -35,37 +37,42 @@ class SignUp {
             
                 if(empty($this -> firstName)) {
                     $this -> firstNameErrors[] = 'Firstname cannot be empty';
-                } else {
-
-                }
-
-                if(empty($this -> lastName)) {
+                } elseif(empty($this -> lastName)) {
                     $this -> lastNameErrors[] = "Lastname cannot be empty";
-                }
-
-                if(empty($this -> middleName)) {
+                } elseif(empty($this -> middleName)) {
                     $this -> middleNameErrors[] = "Middlename cannot be empty";
-                }
-
-                if(empty($this -> matricNumber)) {
+                } elseif(empty($this -> matricNumber)) {
                     $this -> matricErrors[] = "Matric number is required";
-                }
-
-                if(empty($this -> status)) {
+                } elseif(empty($this -> status)) {
                     $this -> statusErrors[] = 'Status required';
-                }
-
-                if($this -> department === 'none') {
+                } elseif($this -> department === 'none') {
                     $this -> departmentErrors[] = 'Pick a department';
-                }
-
-                if(empty($this -> password)) {
+                } elseif(empty($this -> password)) {
                     $this -> passErrors[] = "Password is requred";
+                } elseif($this -> password !== $this -> retypedPassword) {
+                    $this -> passErrors[] = "Passwords do not match!";
+                } else {
+                    $db = new Database();
+
+                    $insertQuery = "INSERT INTO `students`
+                    (`firstname`, `middlename`, `lastname`, `matric`, `password`, `department`, `status`)
+                    VALUES (:firstname, :middlename, :lastname, :matric, :pass, :department, :status)";
+                    $query = $db -> prepare($insertQuery);
+                    
+                    $query -> bindParam(':firstname', $this -> firstName, PDO::PARAM_STR);
+                    $query -> bindParam(':middlename', $this -> middleName, PDO::PARAM_STR);
+                    $query -> bindParam(':lastname', $this -> lastName, PDO::PARAM_STR);
+                    $query -> bindParam(':matric', $this -> matricNumber, PDO::PARAM_STR);
+                    $query -> bindParam(':pass', $this -> password, PDO::PARAM_STR);
+                    $query -> bindParam(':department', $this -> department, PDO::PARAM_STR);
+                    $query -> bindParam(':status', $this -> status, PDO::PARAM_STR);
+
+                    $query -> execute();
                 }
 
-                if($this -> password !== $this -> retypedPassword) {
-                    $this -> passErrors[] = "Passwords do not match!";
-                }
+                // $newDB = new Database();
+                // $newDB -> insertStudentTable($this -> firstName, $this -> middleName, $this -> lastName, $this -> matricNumber, $this -> password, $this -> department, $this -> status);
+
             } else {
                 $this -> requiredError = 'All fields are required';
             }
