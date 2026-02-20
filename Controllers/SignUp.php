@@ -1,5 +1,6 @@
 <?php
 include_once '../Models/Database.php';
+include_once '../Config/config.php';
 
 class SignUp {
     public $firstName;
@@ -53,25 +54,9 @@ class SignUp {
                     $this -> passErrors[] = "Passwords do not match!";
                 } else {
                     $db = new Database();
-
-                    $insertQuery = "INSERT INTO `students`
-                    (`firstname`, `middlename`, `lastname`, `matric`, `password`, `department`, `status`)
-                    VALUES (:firstname, :middlename, :lastname, :matric, :pass, :department, :status)";
-                    $query = $db -> prepare($insertQuery);
-                    
-                    $query -> bindParam(':firstname', $this -> firstName, PDO::PARAM_STR);
-                    $query -> bindParam(':middlename', $this -> middleName, PDO::PARAM_STR);
-                    $query -> bindParam(':lastname', $this -> lastName, PDO::PARAM_STR);
-                    $query -> bindParam(':matric', $this -> matricNumber, PDO::PARAM_STR);
-                    $query -> bindParam(':pass', $this -> password, PDO::PARAM_STR);
-                    $query -> bindParam(':department', $this -> department, PDO::PARAM_STR);
-                    $query -> bindParam(':status', $this -> status, PDO::PARAM_STR);
-
-                    $query -> execute();
+                    $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
+                    $db -> insertStudentTable($this -> firstName, $this -> middleName, $this -> lastName, $this -> matricNumber, $this -> password, $this -> department, $this -> status);
                 }
-
-                // $newDB = new Database();
-                // $newDB -> insertStudentTable($this -> firstName, $this -> middleName, $this -> lastName, $this -> matricNumber, $this -> password, $this -> department, $this -> status);
 
             } else {
                 $this -> requiredError = 'All fields are required';

@@ -38,9 +38,9 @@ class Database {
     }
 
     public function insertStudentTable($firstName, $middleName, $lastName, $matric, $password, $department, $status) {
-        $insertQuery = "INSERT INTO `result_management_system`
-        (`firstname`, `middlename`, `matric`, `password`, `department`, `status`)
-        VALUES (:firstname, :middlename, :matric, :pass, :department, :status)";
+        $insertQuery = "INSERT INTO `students`
+        (`firstname`, `middlename`, `lastname`, `matric`, `password`, `department`, `status`)
+        VALUES (:firstname, :middlename, :lastname, :matric, :pass, :department, :status)";
         $query = $this -> db -> prepare($insertQuery);
         
         $query -> bindParam(':firstname', $firstName, PDO::PARAM_STR);
@@ -49,6 +49,7 @@ class Database {
         $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
         $query -> bindParam(':pass', $password, PDO::PARAM_STR);
         $query -> bindParam(':department', $department, PDO::PARAM_STR);
+        $query -> bindParam(':status', $status, PDO::PARAM_STR);
 
         $query -> execute();
 
