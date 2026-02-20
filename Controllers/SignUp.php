@@ -55,6 +55,14 @@ class SignUp {
                     $this -> passErrors[] = "Passwords do not match!";
                 } elseif($allEmpty) {
                     $this -> requiredError[] = 'All fields are required';
+                } elseif(strlen($this -> firstName) < 3) {
+                        $this -> firstNameErrors[] = 'Name should be more than 3 letters'; 
+                } elseif(strlen($this -> lastName) < 3) {
+                        $this -> lastNameErrors[] = 'Name should be more than 3 letters';
+                } elseif(strlen($this -> matricNumber) < 5 && strlen($this -> matricNumber) > 5) {
+                    $this -> matricErrors[] = "Matric number should be exactly 5 digits";
+                } elseif(!preg_match("[A-Za-z0-9#$&]", $this -> password)) {
+                    $this -> passErrors[] = "Password must contain letters, numbers and any of #$&";
                 } else {
                     $db = new Database();
                     $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
