@@ -32,7 +32,7 @@ class SignUp {
                 $this -> middleName = htmlspecialchars(trim($_POST['middlename']));
                 $this -> lastName = htmlspecialchars(trim($_POST['lastname']));
                 $this -> matricNumber = htmlspecialchars(trim($_POST['matric_number']));
-                $this -> password = htmlspecialchars(trim($_POST['pass']));
+                $this -> password = trim($_POST['pass']);
                 $this -> department = htmlspecialchars(trim($_POST['department']));
                 $this -> status = htmlspecialchars(trim($_POST['status']));
                 $this -> retypedPassword = htmlspecialchars(trim($_POST['retyped_pass']));
