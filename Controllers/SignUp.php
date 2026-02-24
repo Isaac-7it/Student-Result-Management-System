@@ -99,7 +99,9 @@ class SignUp {
                     $this -> passErrors[] = "Password shouldn't be more than 8 characters!";
                 }
                 else {
-                    $password = password_hash($this -> password, PASSWORD_DEFAULT);
+                    $password = password_hash(
+                        $this -> password,
+                        PASSWORD_DEFAULT);
                 }
                 
                 if($allEmpty) {

@@ -34,11 +34,7 @@ class SignIn {
                         $db = new Database();
                         $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
                         $matchingData = $db -> fetchStudentDataByMatric($matricNumber);
-                        echo '<br>';
-                        print_r($matchingData);
-                       
-                        echo '<br>';
-                        var_dump(password_verify($password, $matchingData[0]['password']));
+                                               
                         if(password_verify($password, $matchingData[0]['password']) && ($matchingData[0]['matric'] === $matricNumber)) {
                         header('Location: ../Views/Home.php');
                         exit();

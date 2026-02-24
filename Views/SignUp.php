@@ -4,8 +4,8 @@ include_once '../Controllers/SignUp.php';
 include_once '../Models/Database.php';
 
 // $db = new Database();
-// $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
-// $db -> deleteStudentData("243563");
+// $db = $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
+// $db -> exec("ALTER TABLE students CHANGE password password VARCHAR(255) NOT NULL");
 ?>
 <main>
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="p-4">
@@ -78,7 +78,7 @@ include_once '../Models/Database.php';
                 <button type="submit" class="w-full bg-primary px-sm py-xsm rounded-input text-white">Sign Up</button>
             </div>
             <div class="">
-                <p class="">Already have an account? <a href="#">Sign In</a></p>
+                <p class="">Already have an account? <a href="../Views/SignIn.php">Sign In</a></p>
             </div>
         </div>
     </form>
