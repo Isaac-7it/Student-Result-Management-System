@@ -1,10 +1,14 @@
 <?php
 include_once '../utility/header.php';
 include_once '../Controllers/SignUp.php';
+include_once '../Models/Database.php';
 
+// $db = new Database();
+// $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
+// $db -> deleteStudentData("243563");
 ?>
 <main>
-    <form action="<?= htmlspecialchars($_SERVER['PHP_SELF']) ?>" method="POST" class="p-4">
+    <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="p-4">
         <div class="">
             <div class="mb-xmd">
                 <h2 class="text-h3 font-medium">Create an Account</h2>

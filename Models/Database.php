@@ -10,7 +10,7 @@ class Database {
             return $this -> db;
     }
 
-    public function createStudentDetails() {
+    public function createStudentData() {
         $createTableQuery = "CREATE TABLE students(
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
             firstname VARCHAR(50) NOT NULL,
@@ -38,7 +38,7 @@ class Database {
         )";
     }
 
-    public function insertStudentTable($firstName, $middleName, $lastName, $matric, $password, $department, $status) {
+    public function insertStudentData($firstName, $middleName, $lastName, $matric, $password, $department, $status) {
         $insertQuery = "INSERT INTO `students`
         (`firstname`, `middlename`, `lastname`, `matric`, `password`, `department`, `status`)
         VALUES (:firstname, :middlename, :lastname, :matric, :pass, :department, :status)";
@@ -63,10 +63,10 @@ class Database {
         }
     }
 
-    public function fetchStudentData($key) {
+    public function fetchStudentDataByMatric($key) {
         $selectQuery = "SELECT * 
         FROM `students` 
-        WHERE matric=:matric";
+        WHERE `matric`=:matric";
 
         $query = $this -> db -> prepare($selectQuery);
 
@@ -79,17 +79,31 @@ class Database {
         return $matchCases;
     }
 
+    public function fetchStudentDataByMiddlename($key) {
+        $selectQuery = "SELECT * 
+        FROM `students` 
+        WHERE `middlename`=:middlename";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(":middlename", $key, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
+    }
+
     public function updateStudentTable() {
         $updateQuery = "UPDATE result_management_system";
     }
 
-    public function searchDatabase($key) {
+    public function deleteStudentData($matric) {
+        $deleteQuery = "DELETE FROM `students` WHERE `matric`=:matric";
 
+        $query = ($this -> db) -> prepare($deleteQuery);
+        $query -> bindParam(":matric", $matric, PDO::PARAM_STR);
+        $query -> execute();
     }
-}
-
-try {
-
-} catch(PDOException $e) {
-    echo "Error: {$e}";
 }
