@@ -1,10 +1,19 @@
 @import "tailwindcss";
 
 @theme {
+    --font-stats: "Manrope",
+        sans-serif;
+    --text-h2: 48px;
     --text-h3: 32px;
+    --text-h4: 24px;
+    --text-icon: 20px;
+    --text-h5: 16px;
     --text-label: 14px;
+    --text-sm-title: 13px;
     --radius-input: 10px;
+    --color-light-grey: #f5f5f5;
     --color-grey: #D9D9D9;
+    --color-dark-grey: #a0a0a0;
     --color-primary: #3A5B22;
     --spacing-xlg: 104px;
     --spacing-lg: 96px;
@@ -29,8 +38,16 @@
     }
 
     body {
-        font-family: "Poppins",
-            sans-serif;
+        font-family: "Poppins", sans-serif;
         line-height: 1.2;
+        background: #F3F4FA;
+    }
+
+    .grid {
+        display: grid;
+        grid-template-columns: repeat(3, minmax(40px, 1fr));
+        grid-template-rows: repeat(1, 80px);
+        gap: 8px;
+        text-align: center;
     }
 }

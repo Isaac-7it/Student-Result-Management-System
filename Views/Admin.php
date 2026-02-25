@@ -1,20 +1,14 @@
 <?php
-include_once '../Controllers/SignIn.php';
 include_once '../utility/header.php';
-include_once '../Models/Database.php';
-
-// $newDB = new Database();
-// $newSignIn = new SignIn();
-// $newDB -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
-// print_r($newDB -> fetchStudentDataByMatric($newSignIn -> matricNumber));
-print_r($_SESSION);
+include_once '../Controllers/SignUp.php';
+// print_r($_SESSION);
 ?>
 <main class="p-xsm">
     <nav class="flex items-center justify-between mb-sm">
         <span class="text-icon p-1.5 inline-block bg-white rounded">
             <i class="fa-solid fa-bars"></i>
         </span>
-        <span>Student <span class="font-semibold">Dashboard</span></span>
+        <span>Admin <span class="font-semibold">Dashboard</span></span>
         <span class="text-icon inline-block"><i class="fa-solid fa-bell"></i></span>
     </nav>
     <div class="bg-white p-sm rounded-xl mb-sm">
@@ -48,7 +42,7 @@ print_r($_SESSION);
             <a href="" class="py-xsm bg-blue-800 block w-full text-white rounded-md">View Grades</a>
         </div>
         <div class="text-center mb-sm">
-            <a href="../Views/Enrollment.php" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Register Courses</a>
+            <a href="" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Register Courses</a>
         </div>
            <div class="text-center mb-sm">
             <a href="" class="py-xsm text-dark-grey block w-full bg-white rounded-md">

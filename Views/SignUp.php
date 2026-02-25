@@ -4,6 +4,8 @@ include_once '../Controllers/SignUp.php';
 include_once '../Models/Database.php';
 
 // $db = new Database();
+// $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
+// $db -> createStudentEnrollment();
 // $db = $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
 // $db -> exec("ALTER TABLE students CHANGE password password VARCHAR(255) NOT NULL");
 ?>

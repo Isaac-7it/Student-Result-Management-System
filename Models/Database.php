@@ -25,17 +25,19 @@ class Database {
         $this -> db -> exec($createTableQuery);
     }
 
-    public function createStudentCourse() {
-        $createTableQuery = "CREATE TABLE students(
+    public function createStudentEnrollment() {
+        $createTableQuery = "CREATE TABLE enrollments(
             id INT(11) AUTO_INCREMENT PRIMARY KEY,
-            firstname VARCHAR(50) NOT NULL,
-            middlename VARCHAR(50) NOT NULL,
-            lastname VARCHAR(50) NOT NULL,
-            matric VARCHAR(50) NOT NULL,
-            password VARCHAR(50) NOT NULL,
-            department VARCHAR(50) NOT NULL,
-            status VARCHAR(100) NOT NULL
+            matric_number VARCHAR(50),
+            course_code VARCHAR(50),
+            academic_session VARCHAR(50),
+            semester VARCHAR(50),
+            score VARCHAR(50),
+            letter_grade VARCHAR(50),
+            grade_point VARCHAR(100)
         )";
+
+        $this -> db -> exec($createTableQuery);
     }
 
     public function insertStudentData($firstName, $middleName, $lastName, $matric, $password, $department, $status) {
@@ -61,6 +63,11 @@ class Database {
         } else {
             return "Failed!";
         }
+    }
+
+    public function insertStudentCourses($matric, $course, ) {
+        $insertQuery = "INSERT INTO `enrollments`
+        ";
     }
 
     public function fetchStudentDataByMatric($key) {

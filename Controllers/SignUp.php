@@ -1,5 +1,4 @@
 <?php
-session_start();
 include_once '../Models/Database.php';
 include_once '../Config/config.php';
 
@@ -22,10 +21,10 @@ class SignUp {
     public $requiredError = [];
 
     public function handleRequest() {
-        var_dump($_SERVER['REQUEST_METHOD'] === 'POST');
+        // var_dump($_SERVER['REQUEST_METHOD'] === 'POST');
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $varExist = isset($_POST['firstname']) && isset($_POST['middlename']) && isset($_POST['lastname']) && isset($_POST['matric_number']) && isset($_POST['pass']) && isset($_POST['status']) && isset($_POST['department']) && isset($_POST['retyped_pass']);
-            var_dump(isset($_POST['firstname']), isset($_POST['middlename']), isset($_POST['lastname']), isset($_POST['matric_number']), isset($_POST['pass']), isset($_POST['status']), isset($_POST['department']), isset($_POST['retyped_pass']));
+            // var_dump(isset($_POST['firstname']), isset($_POST['middlename']), isset($_POST['lastname']), isset($_POST['matric_number']), isset($_POST['pass']), isset($_POST['status']), isset($_POST['department']), isset($_POST['retyped_pass']));
 
             if($varExist) {
                 $this -> firstName = htmlspecialchars(trim($_POST['firstname']));
@@ -96,7 +95,7 @@ class SignUp {
                 } elseif(!preg_match("/[A-Za-z0-9#$&]/", $this -> password)) {
                     $this -> passErrors[] = "Password must contain letters, numbers and any of #$&";
                 } elseif (strlen($this -> password) >= 10) {
-                    $this -> passErrors[] = "Password shouldn't be more than 8 characters!";
+                    $this -> passErrors[] = "Password shouldn't be more than 10 characters!";
                 }
                 else {
                     $password = password_hash(
@@ -119,14 +118,15 @@ class SignUp {
                             exit();
                         } else {
                             $db -> insertStudentData($firstName, $middleName, $lastName, $matricNumber, $password, $department, $status);
+                            /*
                             $this -> firstName = $_SESSION["firstName"] = $firstName;
                             $this -> middleName = $_SESSION["middleName"] = $middleName;
                             $this -> lastName = $_SESSION["lastName"] = $lastName;
                             $this -> matricNumber = $_SESSION["matricNumber"] = $matricNumber;
                             $this -> department = $_SESSION["department"] = $department;
-                            $this -> status = $_SESSION["status"] = $status;
+                            $this -> status = $_SESSION["status"] = $status; */
 
-                            header("Location: ../Views/Home.php");
+                            header("Location: ../Views/SignIn.php");
                             exit();
                         } 
                     } catch(PDOException $e) {
