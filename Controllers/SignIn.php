@@ -11,7 +11,6 @@ class SignIn {
     
     public function handleRequest() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-echo 'Test';
 
             $varExist = isset($_POST['matric_number']) && isset($_POST['pass']);
 
@@ -49,7 +48,7 @@ echo 'Test';
                         $_SESSION["matricNumber"] = ($this -> userData)['matric'];
                         $_SESSION["department"] = ($this -> userData)['department'];
                         $_SESSION["status"] = ($this -> userData)['status'];
-                        print_r($_SESSION);
+             
                         header('Location: ../Views/Home.php');
                         exit();
                         } else {

@@ -7,7 +7,7 @@ include_once '../Models/Database.php';
 // $newSignIn = new SignIn();
 // $newDB -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
 // print_r($newDB -> fetchStudentDataByMatric($newSignIn -> matricNumber));
-print_r($_SESSION);
+// print_r($_SESSION);
 ?>
 <main class="p-xsm">
     <nav class="flex items-center justify-between mb-sm">

@@ -23,8 +23,11 @@ include_once '../Controllers/SignIn.php';
             <div class="mb-xmd">
                 <button type="submit" class="w-full bg-primary px-sm py-xsm rounded-input text-white">Sign In</button>
             </div>
-            <div class="">
+            <div class="mb-xmd">
                 <p class="">Don't have an account? <a href="../Views/SignUp.php">Sign Up</a></p>
+            </div>
+            <div class="">
+                <p class="">Are you an admin? <a href="../Views/SignUp.php">Follow here!</a></p>
             </div>
         </div>
     </form>

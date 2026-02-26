@@ -12,7 +12,7 @@ class Database {
 
     public function createStudentData() {
         $createTableQuery = "CREATE TABLE students(
-            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            id INT(11) AUTO_INCREMENT PRIMARY matric,
             firstname VARCHAR(50) NOT NULL,
             middlename VARCHAR(50) NOT NULL,
             lastname VARCHAR(50) NOT NULL,
@@ -27,7 +27,7 @@ class Database {
 
     public function createStudentEnrollment() {
         $createTableQuery = "CREATE TABLE enrollments(
-            id INT(11) AUTO_INCREMENT PRIMARY KEY,
+            id INT(11) AUTO_INCREMENT PRIMARY matric,
             matric_number VARCHAR(50),
             course_code VARCHAR(50),
             academic_session VARCHAR(50),
@@ -65,19 +65,29 @@ class Database {
         }
     }
 
-    public function insertStudentCourses($matric, $course, ) {
+    public function insertStudentCourses($matric, $course, $unit) {
         $insertQuery = "INSERT INTO `enrollments`
-        ";
+        (`matric_number`, `course_code`, `unit`)
+        VALUES (:matric, :course, :unit)";
+
+        $query = $this -> db -> prepare($insertQuery);
+
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+        $query -> bindParam(':course', $course, PDO::PARAM_STR);
+        $query -> bindParam(':unit', $unit, PDO::PARAM_STR);
+
+        $query -> execute();
     }
 
-    public function fetchStudentDataByMatric($key) {
-        $selectQuery = "SELECT * 
-        FROM `students` 
-        WHERE `matric`=:matric";
+    public function fetchStudentCourse($matric, $course) {
+        $selectQuery = "SELECT matric_number, course_code, unit
+        FROM `enrollments`
+        WHERE `matric_number`=:matric AND `course_code`=:course";
 
         $query = $this -> db -> prepare($selectQuery);
 
-        $query -> bindParam(":matric", $key, PDO::PARAM_STR);
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+        $query -> bindParam(':course', $course, PDO::PARAM_STR);
 
         $query -> execute();
 
@@ -86,14 +96,30 @@ class Database {
         return $matchCases;
     }
 
-    public function fetchStudentDataByMiddlename($key) {
+    public function fetchStudentDataByMatric($matric) {
+        $selectQuery = "SELECT * 
+        FROM `students` 
+        WHERE `matric`=:matric";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(":matric", $matric, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
+    }
+
+    public function fetchStudentDataByMiddlename($matric) {
         $selectQuery = "SELECT * 
         FROM `students` 
         WHERE `middlename`=:middlename";
 
         $query = $this -> db -> prepare($selectQuery);
 
-        $query -> bindParam(":middlename", $key, PDO::PARAM_STR);
+        $query -> bindParam(":middlename", $matric, PDO::PARAM_STR);
 
         $query -> execute();
 
