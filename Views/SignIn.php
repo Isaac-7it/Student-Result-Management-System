@@ -27,7 +27,7 @@ include_once '../Controllers/SignIn.php';
                 <p class="">Don't have an account? <a href="../Views/SignUp.php">Sign Up</a></p>
             </div>
             <div class="">
-                <p class="">Are you an admin? <a href="../Views/SignUp.php">Follow here!</a></p>
+                <p class="">Are you an admin? <a href="../Admin/Views/Admin.SignIn.php">Follow here!</a></p>
             </div>
         </div>
     </form>
