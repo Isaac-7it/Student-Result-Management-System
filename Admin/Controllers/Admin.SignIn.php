@@ -32,4 +32,4 @@ class SignIn {
 }
 
 $newSignIn = new SignIn();
-$newSignIn -> handleRequest();
+$students = $newSignIn -> handleRequest();

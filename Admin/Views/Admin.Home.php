@@ -1,5 +1,10 @@
 <?php
-include_once '../Utility/Header.php';
+include_once __DIR__ . '/../Utility/Header.php';
+include_once __DIR__ . '/../../Models/Database.php';
+include_once __DIR__ . '/../Controllers/Admin.SignIn.php';
+
+$newDB = new Database();
+$students = $newDB -> fetchAllStudents();
 ?>
 <main class="p-xsm">
     <nav class="flex items-center justify-between mb-sm">
@@ -26,31 +31,27 @@ include_once '../Utility/Header.php';
             </div>
         </div>
     </div>
-    <div class="">
-        <div class="">
-            <span>GPA Trend</span>
-
-            <span>Last 4 semesters</span>
-        </div>
-        <div class="text-center mb-sm">
-            <a href="" class="py-xsm bg-blue-800 block w-full text-white rounded-md">View Grades</a>
-        </div>
-        <div class="text-center mb-sm">
-            <a href="../Views/Enrollment.php" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Register Courses</a>
-        </div>
-           <div class="text-center mb-sm">
-            <a href="" class="py-xsm text-dark-grey block w-full bg-white rounded-md">
-                <span></span>
-                <span>
-                    Download Transcript
-                </span>
-            </a>
-        </div>
-        </div>
-           <div class="text-center mb-sm">
-            <a href="../Views/Admin.SignIn.php" class="py-xsm text-white block w-full bg-red-700 rounded-md">
-               Log Out
-            </a>
-        </div>
+    <div class="h-[50vh] overflow-x-scroll overflow-y-scroll">
+        <table class="max-content">
+            <thead class="w-full">
+                <tr class="w-full">
+                    <td>Firstname</td>
+                    <td>Middlename</td>
+                    <td>Lastname</td>
+                    <td>Matric</td>
+                    <td>Department</td>
+                    <td>Status</td>
+                </tr>
+            </thead>
+            <tbody class="w-full">
+                <?php foreach($students as $student): ?>
+                    <tr class="w-full">
+                        <?php foreach($student as $data): ?>
+                            <td><?= $data ?></td>
+                        <?php endforeach ?>
+                    </tr>
+                <?php endforeach ?>
+            </tbody>
+        </table>
     </div>
 </main>

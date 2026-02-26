@@ -50,4 +50,21 @@
         gap: 8px;
         text-align: center;
     }
+
+    thead {
+        font-weight: 500;
+        background-color: #D9D9D9;
+    }
+
+    table, th, td {
+        border: 0.5px solid #a0a0a0;
+    }
+
+    tr:nth-child(even) {
+        background-color: #D9D9D9;
+    }
+
+    td {
+        padding: 8px;
+    }
 }

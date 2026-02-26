@@ -1,8 +1,15 @@
 <?php
-include_once '../Config/config.php';
+include_once __DIR__ . '/../Config/config.php';
 
 class Database {
     public $db;
+
+    public function __construct() {
+            $this -> db = new PDO(
+                "mysql:host=" . DB_HOST. ";" . "port=" . DB_PORT . ";" . "dbname=" . DB_NAME . ";", DB_USER, DB_PASSWORD);
+            $this -> db -> setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return $this -> db;
+    }
 
     public function connectDatabase($dbHost, $dbPort, $dbName, $dbUser, $dbPass) {
             $this -> db = new PDO("mysql:host={$dbHost}; port={$dbPort}; dbname={$dbName}", $dbUser, $dbPass);
@@ -112,6 +119,18 @@ class Database {
         return $matchCases;
     }
 
+    public function fetchAllStudents() {
+        $selectQuery = "SELECT firstname, middlename, lastname, matric, department, status
+        FROM `students`";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> execute();
+
+        $students = $query -> fetchAll(PDO::FETCH_ASSOC);
+        return $students;
+    }
+
     public function fetchStudentDataByMiddlename($matric) {
         $selectQuery = "SELECT * 
         FROM `students` 
@@ -140,3 +159,4 @@ class Database {
         $query -> execute();
     }
 }
+
