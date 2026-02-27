@@ -42,7 +42,8 @@ $students = $newDB -> fetchAllStudents();
                     <td>Matric</td>
                     <td>Department</td>
                     <td>Status</td>
-                    <td>Actions</td>
+                    <td>Action (Data)</td>
+                    <td>Action (Course)</td>
                 </tr>
             </thead>
             <tbody class="w-full">
@@ -52,10 +53,16 @@ $students = $newDB -> fetchAllStudents();
                             <td><?= $data ?></td>
                         <?php endforeach ?>
                         <td>
-                        <form action="../Views/Admin.EditData.php" method="POST">
-                            <input type="hidden" name="oldmatric" value="<?= $student["matric"] ?>">
-                            <button class="cursor-pointer" type="submit">Edit <i class="fa-solid fa-pen-to-square"></i></button>
-                        </form>
+                            <form action="../Views/Admin.EditData.php" method="POST">
+                                <input type="hidden" name="oldmatric" value="<?= $student["matric"] ?>">
+                                <button class="cursor-pointer" type="submit">Edit Data <i class="fa-solid fa-pen-to-square"></i></button>
+                            </form>
+                        </td>
+                        <td>
+                            <form action="../Views/Admin.EditCourse.php" method="POST">
+                                <input type="hidden" name="oldmatric" value="<?= $student["matric"] ?>">
+                                <button class="cursor-pointer" type="submit">Edit Course <i class="fa-solid fa-pen-to-square"></i></button>
+                            </form>
                         </td>
                     </tr>
                 <?php endforeach ?>

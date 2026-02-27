@@ -6,8 +6,9 @@ include_once __DIR__ . '/../Controllers/Admin.Edit.php';
 $newDB = new Database();
 if(isset($_POST['oldmatric'])) {
     $student = $newDB -> fetchStudentDataByMatric($_POST['oldmatric'])[0];
-    print_r($student);
+    // print_r($student);
 }
+$newEdit -> editData();
 ?>
 
 <head>
@@ -17,7 +18,7 @@ if(isset($_POST['oldmatric'])) {
     <form action="<?= $_SERVER['PHP_SELF'] ?>" method="POST" class="p-4">
         <div class="">
             <div class="mb-xmd">
-                <h2 class="text-h3 font-medium">Edit Student</h2>
+                <h2 class="text-h3 font-medium">Edit Student Data</h2>
             </div>
             <div class="mb-xmd flex flex-col gap-sm">
                 <input type="hidden" name="id" value="<?= $student["id"] ?? '' ?>">

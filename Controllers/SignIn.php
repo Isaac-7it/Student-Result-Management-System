@@ -37,22 +37,26 @@ class SignIn {
                         $db = new Database();
                         $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
                         $matchingData = $db -> fetchStudentDataByMatric($matricNumber);
-                        $this -> userData = $matchingData[0];
+                        if (count($matchingData) !== 0) {
+                            $this -> userData = $matchingData[0];
                                                
-                        if(password_verify($password, ($this -> userData)['password']) && (($this -> userData)['matric'] === $matricNumber)) {
-                        $this -> userSignIn = true;
-                        // Store user data in session
-                        $_SESSION["firstName"] = ($this -> userData)['firstname'];
-                        $_SESSION["middleName"] = ($this -> userData)['middlename'];
-                        $_SESSION["lastName"] = ($this -> userData)['lastname'];
-                        $_SESSION["matricNumber"] = ($this -> userData)['matric'];
-                        $_SESSION["department"] = ($this -> userData)['department'];
-                        $_SESSION["status"] = ($this -> userData)['status'];
+                            if(password_verify($password, ($this -> userData)['password']) && (($this -> userData)['matric'] === $matricNumber)) {
+                            $this -> userSignIn = true;
+                            // Store user data in session
+                            $_SESSION["firstName"] = ($this -> userData)['firstname'];
+                            $_SESSION["middleName"] = ($this -> userData)['middlename'];
+                            $_SESSION["lastName"] = ($this -> userData)['lastname'];
+                            $_SESSION["matricNumber"] = ($this -> userData)['matric'];
+                            $_SESSION["department"] = ($this -> userData)['department'];
+                            $_SESSION["status"] = ($this -> userData)['status'];
              
-                        header('Location: ../Views/Home.php');
-                        exit();
+                            header('Location: ../Views/Home.php');
+                            exit();
+                            } else {
+                                $this -> passwordError = 'Password or Matric Number is incorrect';
+                            }
                         } else {
-                            $this -> passwordError = 'Password or Matric Number is incorrect';
+                            $this -> passwordError = 'User does not exit!';
                         }
                     } catch(PDOException $e) {
                         echo "Error => {$e}";

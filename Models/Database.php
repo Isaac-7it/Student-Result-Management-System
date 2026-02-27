@@ -103,6 +103,22 @@ class Database {
         return $matchCases;
     }
 
+        public function fetchAllStudentCourse($matric) {
+        $selectQuery = "SELECT matric_number, course_code, unit
+        FROM `enrollments`
+        WHERE `matric_number`=:matric";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
+    }
+
     public function fetchStudentDataByMatric($matric) {
         $selectQuery = "SELECT * 
         FROM `students` 
@@ -160,6 +176,30 @@ class Database {
         $query -> bindParam(':department', $department, PDO::PARAM_STR);
         $query -> bindParam(':status', $status, PDO::PARAM_STR);
         $query -> bindParam(':id', $id, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        if($query -> rowCount() > 0) {
+            return "{$query -> rowCount()} were affected";
+        } else {
+            return "No row was affected";
+        }
+    }
+
+        public function updateStudentCourse($matric, $courseCode, $session, $semester, $score, $letterGrade, $gradePoint, $unit) {
+        $updateQuery = "UPDATE `enrollments`
+        SET `course_code`=:courseCode, `academic_session`=:session, `semester`=:semester, `score`=:score, `letter_grade`=:letterGrade, `grade_point`=:gradePoint, `unit`=:unit
+        WHERE `matric`=:matric";
+
+        $query = $this -> db -> prepare($updateQuery);
+        $query -> bindParam(':courseCode', $courseCode, PDO::PARAM_STR);
+        $query -> bindParam(':session', $session, PDO::PARAM_STR);
+        $query -> bindParam(':semester', $semester, PDO::PARAM_STR);
+        $query -> bindParam(':score', $score, PDO::PARAM_STR);
+        $query -> bindParam(':letterGrade', $letterGrade, PDO::PARAM_STR);
+        $query -> bindParam(':gradePoint', $gradePoint, PDO::PARAM_STR);
+        $query -> bindParam(':unit', $unit, PDO::PARAM_STR);
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
 
         $query -> execute();
 

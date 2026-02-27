@@ -17,7 +17,7 @@ class Edit {
     public $departmentErrors = [];
     public $feedback = [];
 
-    public function editCourse() {
+    public function editData() {
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
             $varExist = isset($_POST["firstname"]) && isset($_POST["middlename"]) && isset($_POST["lastname"]) && isset($_POST["matric_number"]) && isset($_POST["department"]) && isset($_POST["status"]) && isset($_POST["id"]);
@@ -88,7 +88,7 @@ class Edit {
                 } elseif(empty($this -> firstNameErrors) && empty($this -> lastNameErrors) && empty($this -> middleNameErrors) && empty($this -> feedback) && empty($this -> matricErrors) && empty($this -> departmentErrors) && empty($this -> statusErrors['status'])) {
                      try {
                         $db = new Database();
-                        echo $db -> updateStudentData($id, $firstName, $middleName, $lastName, $matricNumber, $department, $status);
+                        $db -> updateStudentData($id, $firstName, $middleName, $lastName, $matricNumber, $department, $status);
                         $this -> feedback[] = 'Successful!';
                     } catch(PDOException $e) {
                         echo "Error => {$e}";
@@ -100,4 +100,3 @@ class Edit {
 }
 
 $newEdit = new Edit();
-$newEdit -> editCourse();
