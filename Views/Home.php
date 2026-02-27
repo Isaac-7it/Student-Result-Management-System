@@ -59,7 +59,7 @@ include_once '../Models/Database.php';
             </a>
         </div>
         </div>
-           <div class="text-center mb-sm">
+        <div class="text-center mb-sm">
             <a href="../Views/SignIn.php" class="py-xsm text-white block w-full bg-red-700 rounded-md">
                Log Out
             </a>

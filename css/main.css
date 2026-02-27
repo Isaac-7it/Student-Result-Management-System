@@ -67,4 +67,8 @@
     td {
         padding: 8px;
     }
+
+    button {
+        cursor: pointer;
+    }
 }

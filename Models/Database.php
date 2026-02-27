@@ -147,8 +147,27 @@ class Database {
         return $matchCases;
     }
 
-    public function updateStudentTable() {
-        $updateQuery = "UPDATE result_management_system";
+    public function updateStudentData($id, $firstName, $middleName, $lastName, $matric, $department, $status) {
+        $updateQuery = "UPDATE `students`
+        SET `firstname`=:firstname, `middlename`=:middlename, `lastname`=:lastname, `matric`=:matric, `department`=:department, `status`=:status
+        WHERE `id`=:id";
+
+        $query = $this -> db -> prepare($updateQuery);
+        $query -> bindParam(':firstname', $firstName, PDO::PARAM_STR);
+        $query -> bindParam(':middlename', $middleName, PDO::PARAM_STR);
+        $query -> bindParam(':lastname', $lastName, PDO::PARAM_STR);
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+        $query -> bindParam(':department', $department, PDO::PARAM_STR);
+        $query -> bindParam(':status', $status, PDO::PARAM_STR);
+        $query -> bindParam(':id', $id, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        if($query -> rowCount() > 0) {
+            return "{$query -> rowCount()} were affected";
+        } else {
+            return "No row was affected";
+        }
     }
 
     public function deleteStudentData($matric) {

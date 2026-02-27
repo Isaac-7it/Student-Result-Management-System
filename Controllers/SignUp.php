@@ -105,7 +105,7 @@ class SignUp {
                 
                 if($allEmpty) {
                     $this -> requiredError[] = 'All fields are required';
-                } elseif(empty($this -> firstNameErrors) && empty($this -> lastNameErrors) && empty($this -> middleNameErrors) && empty($this -> passErrors) && empty($this -> requiredError) && empty($this -> matricErrors) && empty($this -> departmentErrors)) {
+                } elseif(empty($this -> firstNameErrors) && empty($this -> lastNameErrors) && empty($this -> middleNameErrors) && empty($this -> passErrors) && empty($this -> requiredError) && empty($this -> matricErrors) && empty($this -> departmentErrors) && empty($this -> statusErrors['status'])) {
                      try {
                         $db = new Database();
                         $db -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);

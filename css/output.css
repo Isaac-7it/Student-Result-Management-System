@@ -203,14 +203,14 @@
   .grid {
     display: grid;
   }
+  .hidden {
+    display: none;
+  }
   .inline-block {
     display: inline-block;
   }
   .table {
     display: table;
-  }
-  .h-36 {
-    height: calc(var(--spacing) * 36);
   }
   .h-\[50vh\] {
     height: 50vh;
@@ -229,6 +229,9 @@
   }
   .border-collapse {
     border-collapse: collapse;
+  }
+  .cursor-pointer {
+    cursor: pointer;
   }
   .resize {
     resize: both;
@@ -416,6 +419,9 @@
   }
   td {
     padding: 8px;
+  }
+  button {
+    cursor: pointer;
   }
 }
 @property --tw-border-style {
