@@ -4,11 +4,11 @@ include_once __DIR__ . '/../../Models/Database.php';
 include_once __DIR__ . '/../Controllers/Admin.SignIn.php';
 include_once __DIR__ . '/../Controllers/Admin.EditCourse.php';
 $newDB = new Database();
-if(isset($_POST['oldmatric'])) {
-    $courses = $newDB -> fetchAllStudentCourse($_POST['oldmatric']);
+if(isset($_POST['matric'])) {
+    $courses = $newDB -> fetchAllStudentCourse($_POST['matric']);
     print_r($courses);
 }
-$courses = [];
+
 ?>
 
 <head>

@@ -5,14 +5,12 @@ class Edit {
     public $firstName;
     public $middleName;
     public $lastName;
-    public $matricNumber;
     public $department;
     public $status;
     public $id;
     public $firstNameErrors = [];
     public $lastNameErrors = [];
     public $middleNameErrors = [];
-    public $matricErrors = [];
     public $statusErrors = [];
     public $departmentErrors = [];
     public $feedback = [];
@@ -20,18 +18,17 @@ class Edit {
     public function editData() {
 
     if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $varExist = isset($_POST["firstname"]) && isset($_POST["middlename"]) && isset($_POST["lastname"]) && isset($_POST["matric_number"]) && isset($_POST["department"]) && isset($_POST["status"]) && isset($_POST["id"]);
+            $varExist = isset($_POST["firstname"]) && isset($_POST["middlename"]) && isset($_POST["lastname"]) && isset($_POST["department"]) && isset($_POST["status"]) && isset($_POST["id"]);
 
             if($varExist) {
                 $this -> firstName = htmlspecialchars(trim($_POST['firstname']));
                 $this -> middleName = htmlspecialchars(trim($_POST['middlename']));
                 $this -> lastName = htmlspecialchars(trim($_POST['lastname']));
-                $this -> matricNumber = htmlspecialchars(trim($_POST['matric_number']));
                 $this -> department = htmlspecialchars(trim($_POST['department']));
                 $this -> status = htmlspecialchars(trim($_POST['status']));
                 $id = $this -> id = $_POST["id"];
 
-                $allEmpty = empty($this -> firstName) && empty($this -> middleName) && empty($this -> lastName) && empty($this -> matricNumber) && empty($this -> status);
+                $allEmpty = empty($this -> firstName) && empty($this -> middleName) && empty($this -> lastName) && empty($this -> status);
 
                 // Validate Firstname
                 if(empty($this -> firstName)) {
@@ -57,17 +54,6 @@ class Edit {
                 } else {
                     $middleName = $this -> middleName;
                 }
-
-                // Validate Matricnumber
-                if(empty($this -> matricNumber)) {
-                    $this -> matricErrors[] = "Matric number is required";
-                } elseif(strlen($this -> matricNumber) !== 6) {
-                    $this -> matricErrors[] = "Matric number should be exactly 5 digits";
-                } elseif(!preg_match("/\d/", $this -> matricNumber)) {
-                    $this -> matricErrors[] = "Matric number should be numeric";
-                } else {
-                    $matricNumber = $this -> matricNumber;
-                }
                 
                 // Validate status
                 if(empty($this -> status)) {
@@ -85,10 +71,10 @@ class Edit {
 
                 if($allEmpty) {
                     $this -> feedback[] = 'All fields are required';
-                } elseif(empty($this -> firstNameErrors) && empty($this -> lastNameErrors) && empty($this -> middleNameErrors) && empty($this -> feedback) && empty($this -> matricErrors) && empty($this -> departmentErrors) && empty($this -> statusErrors['status'])) {
+                } elseif(empty($this -> firstNameErrors) && empty($this -> lastNameErrors) && empty($this -> middleNameErrors) && empty($this -> feedback) && empty($this -> departmentErrors) && empty($this -> statusErrors['status'])) {
                      try {
                         $db = new Database();
-                        $db -> updateStudentData($id, $firstName, $middleName, $lastName, $matricNumber, $department, $status);
+                        $db -> updateStudentData($id, $firstName, $middleName, $lastName, $department, $status);
                         $this -> feedback[] = 'Successful!';
                     } catch(PDOException $e) {
                         echo "Error => {$e}";

@@ -31,19 +31,25 @@ class Enrollment {
                     $unit = $this -> unit;
                 }
 
+                var_dump(empty($unitErrors) && empty($courseErrors));
+
                 if(empty($unitErrors) && empty($courseErrors)) {
-                    try {
-                        $newDB = new Database();
-                        $newDB -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
-                        $studentCourseData = $newDB -> fetchStudentCourse($matric, $course);
-                        if(empty($studentCourseData)) {
-                            $newDB -> insertStudentCourses($matric, $course, $unit);
-                            $this -> feedback[] = 'Successful!';
-                        } else {
-                            $this -> feedback[] = 'You already registered for this course!';
+                    if(isset($course) && isset($matric)) {
+                        try {
+                            $newDB = new Database();
+                            $newDB -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
+                            $studentCourseData = $newDB -> fetchStudentCourse($matric, $course);
+                            if(empty($studentCourseData)) {
+                                $newDB -> insertStudentCourses($matric, $course, $unit);
+                                $this -> feedback[] = 'Successful!';
+                            } else {
+                                $this -> feedback[] = 'You already registered for this course!';
+                            }
+                            } catch (PDOException $e) {
+                            echo "Error => $e";
                         }
-                        } catch (PDOException $e) {
-                        echo "Error => $e";
+                    } else {
+                        $this -> feedback[] = 'Invalid inputs!';
                     }
                 } else {
                     $this -> feedback[] = 'All fields are required!';

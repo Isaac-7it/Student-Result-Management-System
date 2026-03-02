@@ -4,9 +4,9 @@ include_once __DIR__ . '/../../Models/Database.php';
 include_once __DIR__ . '/../Controllers/Admin.SignIn.php';
 include_once __DIR__ . '/../Controllers/Admin.Edit.php';
 $newDB = new Database();
-if(isset($_POST['oldmatric'])) {
-    $student = $newDB -> fetchStudentDataByMatric($_POST['oldmatric'])[0];
-    // print_r($student);
+if(isset($_POST['matric'])) {
+    $student = $newDB -> fetchStudentDataByMatric($_POST['matric'])[0];
+    print_r($student);
 }
 $newEdit -> editData();
 ?>
@@ -41,13 +41,6 @@ $newEdit -> editData();
                     <input class="border-2 p-xsm border-grey rounded-input" type="text" id="lastname" name="lastname" value="<?= $student["lastname"] ?? '' ?>">
                     <span class="text-red-600">
                         <?= implode('<br>', $newEdit -> lastNameErrors) ?>
-                    </span>
-                </div>
-                <div class="flex flex-col">
-                    <label for="matric_number" class="text-label font-medium">Matric no</label>
-                    <input class="border-2 p-xsm border-grey rounded-input" type="text" id="matric_number" name="matric_number" value="<?= $student["matric"] ?? '' ?>">
-                    <span class="text-red-600">
-                        <?= implode('<br>', $newEdit -> matricErrors) ?>
                     </span>
                 </div>
                 <div class="flex flex-col">

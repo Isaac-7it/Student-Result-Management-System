@@ -163,16 +163,15 @@ class Database {
         return $matchCases;
     }
 
-    public function updateStudentData($id, $firstName, $middleName, $lastName, $matric, $department, $status) {
+    public function updateStudentData($id, $firstName, $middleName, $lastName, $department, $status) {
         $updateQuery = "UPDATE `students`
-        SET `firstname`=:firstname, `middlename`=:middlename, `lastname`=:lastname, `matric`=:matric, `department`=:department, `status`=:status
+        SET `firstname`=:firstname, `middlename`=:middlename, `lastname`=:lastname, `department`=:department, `status`=:status
         WHERE `id`=:id";
 
         $query = $this -> db -> prepare($updateQuery);
         $query -> bindParam(':firstname', $firstName, PDO::PARAM_STR);
         $query -> bindParam(':middlename', $middleName, PDO::PARAM_STR);
         $query -> bindParam(':lastname', $lastName, PDO::PARAM_STR);
-        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
         $query -> bindParam(':department', $department, PDO::PARAM_STR);
         $query -> bindParam(':status', $status, PDO::PARAM_STR);
         $query -> bindParam(':id', $id, PDO::PARAM_STR);
@@ -186,7 +185,7 @@ class Database {
         }
     }
 
-        public function updateStudentCourse($matric, $courseCode, $session, $semester, $score, $letterGrade, $gradePoint, $unit) {
+    public function updateStudentCourse($matric, $courseCode, $session, $semester, $score, $letterGrade, $gradePoint, $unit) {
         $updateQuery = "UPDATE `enrollments`
         SET `course_code`=:courseCode, `academic_session`=:session, `semester`=:semester, `score`=:score, `letter_grade`=:letterGrade, `grade_point`=:gradePoint, `unit`=:unit
         WHERE `matric`=:matric";

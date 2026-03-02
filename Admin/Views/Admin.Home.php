@@ -54,14 +54,14 @@ $students = $newDB -> fetchAllStudents();
                         <?php endforeach ?>
                         <td>
                             <form action="../Views/Admin.EditData.php" method="POST">
-                                <input type="hidden" name="oldmatric" value="<?= $student["matric"] ?>">
-                                <button class="cursor-pointer" type="submit">Edit Data <i class="fa-solid fa-pen-to-square"></i></button>
+                                <input type="hidden" name="matric" value="<?= $student["matric"] ?>">
+                                <button class="cursor-pointer" type="submit"><i class="fa-solid fa-pen-to-square"></i></button>
                             </form>
                         </td>
                         <td>
                             <form action="../Views/Admin.EditCourse.php" method="POST">
-                                <input type="hidden" name="oldmatric" value="<?= $student["matric"] ?>">
-                                <button class="cursor-pointer" type="submit">Edit Course <i class="fa-solid fa-pen-to-square"></i></button>
+                                <input type="hidden" name="matric" value="<?= $student["matric"] ?>">
+                                <button class="cursor-pointer" type="submit"><i class="fa-solid fa-trash"></i></button>
                             </form>
                         </td>
                     </tr>
