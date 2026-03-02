@@ -31,8 +31,6 @@ class Enrollment {
                     $unit = $this -> unit;
                 }
 
-                var_dump(empty($unitErrors) && empty($courseErrors));
-
                 if(empty($unitErrors) && empty($courseErrors)) {
                     if(isset($course) && isset($matric)) {
                         try {

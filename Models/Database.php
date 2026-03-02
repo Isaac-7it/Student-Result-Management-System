@@ -103,7 +103,7 @@ class Database {
         return $matchCases;
     }
 
-        public function fetchAllStudentCourse($matric) {
+    public function fetchAllStudentCourse($matric) {
         $selectQuery = "SELECT matric_number, course_code, unit
         FROM `enrollments`
         WHERE `matric_number`=:matric";

@@ -7,8 +7,11 @@ $newDB = new Database();
 if(isset($_POST['matric'])) {
     $courses = $newDB -> fetchAllStudentCourse($_POST['matric']);
     print_r($courses);
+} else {
+    $courses = [];
 }
-
+$newEdit = new Edit();
+$newEdit -> editCourse();
 ?>
 
 <head>

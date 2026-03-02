@@ -2,7 +2,8 @@
 include_once '../Controllers/SignIn.php';
 include_once '../utility/header.php';
 include_once '../Models/Database.php';
-
+include_once '../Controllers/GradePoint.php';
+$gradePoint = new GradePoint($_SESSION["matricNumber"]);
 // $newDB = new Database();
 // $newSignIn = new SignIn();
 // $newDB -> connectDatabase(DB_HOST, DB_PORT, DB_NAME, DB_USER, DB_PASSWORD);
@@ -34,7 +35,7 @@ include_once '../Models/Database.php';
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Credits</span>
-                <span class="font-stats text-3xl font-medium">3.67</span>
+                <span class="font-stats text-3xl font-medium"><?= $gradePoint -> getCredits() ?></span>
             </div>
         </div>
     </div>
