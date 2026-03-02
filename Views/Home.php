@@ -10,6 +10,8 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
 // print_r($newDB -> fetchStudentDataByMatric($newSignIn -> matricNumber));
 // print_r($_SESSION);
 ?>
+
+<?php if(isset($_SESSION["loggedIn"]) || $_SESSION["loggedIn"] === true): ?>
 <main class="p-xsm">
     <nav class="flex items-center justify-between mb-sm">
         <span class="text-icon p-1.5 inline-block bg-white rounded">
@@ -30,8 +32,10 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
                 <span class="font-stats text-3xl font-medium">3.67</span>
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
-                <span class="text-[12px] text-wrap flex-1 inline-block">Cummu. GPA</span>
-                <span class="font-stats text-3xl font-medium">3.67</span>
+                <span class="text-[12px] text-wrap flex-1 inline-block">Courses Registered</span>
+                <span class="font-stats text-3xl font-medium">
+                    <?= $gradePoint -> getNumberOfCourses() ?>
+                </span>
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Credits</span>
@@ -61,12 +65,19 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
         </div>
         </div>
         <div class="text-center mb-sm">
-            <a href="../Views/SignIn.php" class="py-xsm text-white block w-full bg-red-700 rounded-md">
+            <a href="../Controllers/LogOut.php" class="py-xsm text-white block w-full bg-red-700 rounded-md">
                Log Out
             </a>
         </div>
     </div>
 </main>
+<?php else: ?>
+<div class="text-center">
+    <p>Please log in to access this page.</p>
+</div>
+<?php 
+header("Location: ../Views/SignIn.php");
+endif; ?>
 <?php
 include_once '../utility/footer.php';
 ?>

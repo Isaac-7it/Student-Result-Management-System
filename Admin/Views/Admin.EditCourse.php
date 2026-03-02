@@ -23,7 +23,7 @@ $newEdit -> editCourse();
     </div>
     <div class="overflow-x-scroll">
         <?php foreach($courses as $course): ?>
-                <form action="<?= $_SERVER['PHP_SELF'] ?>" class="flex gap-1 mb-2">
+                <form action="<?= $_SERVER['PHP_SELF'] ?>" class="flex gap-1 mb-2" method="POST">
                     <?php foreach($course as $detail): ?>
                         <input type="text" name="<?= implode('', array_keys($course, $detail)) ?>" value="<?= $detail ?>" class="border-2 border-grey rounded-input p-1">
                     <?php endforeach ?>
@@ -39,6 +39,7 @@ $newEdit -> editCourse();
                     <button type="submit" class="bg-red-700 text-white px-4 rounded-md">Update</button>
                 </form>
         <?php endforeach ?>
+        <a href="../Views/Admin.Home.php" class="">Back to home!</a>
     </div>
 </main>
 

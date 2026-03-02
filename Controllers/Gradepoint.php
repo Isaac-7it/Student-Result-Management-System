@@ -23,4 +23,14 @@ class GradePoint {
             echo "Error => {$e}";
         }
     }
+
+    public function getNumberOfCourses() {
+        try {
+            $db = new Database();
+            $courses = $db -> fetchAllStudentCourse($this -> matricNumber);
+            return count($courses);
+        } catch(PDOException $e) {
+            echo "Error => {$e}";
+        }
+    }
 }

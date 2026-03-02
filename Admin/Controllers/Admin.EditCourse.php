@@ -6,6 +6,7 @@ class Edit {
     public $academicSession;
     public $semester;
     public $score;
+    public $id;
     public $letterGrade;
     public $gradePoint;
     public $unit;
@@ -13,10 +14,11 @@ class Edit {
     public $courseCodeErrors=[];
     public $scoreError=[];
     public $unitErrors=[];
+    public $requiredError=[];
 
     public function editCourse() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
-            $varExist = isset($_POST['matric_number']) && isset($_POST['course_code']) && isset($_POST['unit']) && isset($_POST['session']) && isset($_POST['semester']) && isset($_POST['score']) && isset($_POST['unit']);
+            $varExist = isset($_POST['matric_number']) && isset($_POST['course_code']) && isset($_POST['unit']) && isset($_POST['session']) && isset($_POST['semester']) && isset($_POST['score']) && isset($_POST['unit']) && isset($_POST['id']);
 
             if($varExist) {
                 $this -> matricNumber = htmlspecialchars(trim($_POST['matric_number']));
@@ -25,12 +27,13 @@ class Edit {
                 $semester = $this -> semester = htmlspecialchars(trim($_POST['semester']));
                 $this -> score = htmlspecialchars(trim($_POST['score']));
                 $this -> unit = htmlspecialchars(trim($_POST['unit']));
+                $this -> id = htmlspecialchars(trim($_POST['id']));
 
                 // Validate Matric Number
                 if(empty($this -> matricNumber)) {
                     $this -> matricErrors[] = 'Matric number cannot be empty';
-                } elseif(strlen($this -> matricNumber) !== 5) {
-                        $this -> matricErrors[] = 'Matric number should be 5 digits'; 
+                } elseif(strlen($this -> matricNumber) !== 6) {
+                        $this -> matricErrors[] = 'Matric number should be 6 digits'; 
                 } else {
                     $matricNumber = $this -> matricNumber;
                 }
@@ -38,7 +41,7 @@ class Edit {
                 // Validate Course Code
                 if(empty($this -> courseCode)) {
                     $this -> courseCodeErrors[] = "Course code cannot be empty";
-                } elseif(!preg_match('/^[A-Za-z]{3}\s?[0-9]{3}$/', $this -> course)) {
+                } elseif(!preg_match('/^[A-Za-z]{3}\s?[0-9]{3}$/', $this -> courseCode)) {
                         $this -> courseCodeErrors[] = 'Invalid course code';
                 } else {
                     $courseCode = $this -> courseCode;
@@ -51,6 +54,12 @@ class Edit {
                     $this -> unitErrors[] = 'Invalid unit!';
                 } else {
                     $unit = $this -> unit;
+                }
+
+                if(empty($this -> id)) {
+                    $this -> feedback[] = 'Do not edit the id!';
+                } else {
+                    $id = $this -> id;
                 }
                 
                 // Validate Score
@@ -97,17 +106,21 @@ class Edit {
                 }
                 
                 $allEmpty = empty($this -> unitErrors) && empty($this -> matricErrors) && empty($this -> unitErrors) && empty($this -> courseCodeErrors);
-                
+                var_dump($allEmpty);
                 if($allEmpty) {
-                    $this -> requiredError[] = 'All fields are required';
-                } else {
-                     try {
-                        $db = new Database();
-                        $db -> updateStudentCourse($matricNumber, $courseCode, $session, $semester, $score, $letterGrade, $gradePoint, $unit);
-                        echo 'Done';
-                    } catch(PDOException $e) {
-                        echo "Error => {$e}";
+                    if(isset($id) && isset($matricNumber) && isset($courseCode) && isset($session) && isset($semester) && isset($score) && isset($letterGrade) && isset($gradePoint) && isset($unit)) {
+                        try {
+                            $db = new Database();
+                            $db -> updateStudentCourse($id, $matricNumber, $courseCode, $session, $semester, $score, $letterGrade, $gradePoint, $unit);
+                            echo 'Done';
+                        } catch(PDOException $e) {
+                            echo "Error => {$e}";
+                        }
+                    } else {
+                        $this -> requiredError[] = 'Invalid inputs!';
                     }
+                } else {
+                    $this -> requiredError[] = 'All fields are required';
                 }
             } else {
                 $this -> requiredError[] = 'All fields are required';

@@ -49,7 +49,7 @@ class SignIn {
                             $_SESSION["matricNumber"] = ($this -> userData)['matric'];
                             $_SESSION["department"] = ($this -> userData)['department'];
                             $_SESSION["status"] = ($this -> userData)['status'];
-             
+                            $_SESSION["loggedIn"] = true;
                             header('Location: ../Views/Home.php');
                             exit();
                             } else {
