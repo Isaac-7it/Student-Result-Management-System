@@ -87,7 +87,7 @@ class Database {
     }
 
     public function fetchStudentCourse($matric, $course) {
-        $selectQuery = "SELECT id, matric_number, course_code, unit
+        $selectQuery = "SELECT matric_number, course_code, unit
         FROM `enrollments`
         WHERE `matric_number`=:matric AND `course_code`=:course";
 
@@ -104,7 +104,23 @@ class Database {
     }
 
     public function fetchAllStudentCourse($matric) {
-        $selectQuery = "SELECT matric_number, course_code, unit
+        $selectQuery = "SELECT id, matric_number, course_code, unit, score
+        FROM `enrollments`
+        WHERE `matric_number`=:matric";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
+    }
+
+    public function fetchAllStudentCourseDetails($matric) {
+        $selectQuery = "SELECT *
         FROM `enrollments`
         WHERE `matric_number`=:matric";
 
@@ -203,7 +219,6 @@ class Database {
         $query -> bindParam(':id', $id, PDO::PARAM_STR);
 
         $query -> execute();
-
         if($query -> rowCount() > 0) {
             return "{$query -> rowCount()} were affected";
         } else {

@@ -18,8 +18,9 @@ class Edit {
 
     public function editCourse() {
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
+            var_dump(isset($_POST['id']));
             $varExist = isset($_POST['matric_number']) && isset($_POST['course_code']) && isset($_POST['unit']) && isset($_POST['session']) && isset($_POST['semester']) && isset($_POST['score']) && isset($_POST['unit']) && isset($_POST['id']);
-
+            
             if($varExist) {
                 $this -> matricNumber = htmlspecialchars(trim($_POST['matric_number']));
                 $this -> courseCode = htmlspecialchars(trim($_POST['course_code']));
@@ -104,7 +105,6 @@ class Edit {
                             $gradePoint = $this -> gradePoint = 0;
                     }
                 }
-                
                 $allEmpty = empty($this -> unitErrors) && empty($this -> matricErrors) && empty($this -> unitErrors) && empty($this -> courseCodeErrors);
                 var_dump($allEmpty);
                 if($allEmpty) {

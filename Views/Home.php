@@ -29,7 +29,7 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
         <div class="grid">
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Current GPA</span>
-                <span class="font-stats text-3xl font-medium">3.67</span>
+                <span class="font-stats text-3xl font-medium"><?= (float) $gradePoint -> getCGPA() ?></span>
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Courses Registered</span>

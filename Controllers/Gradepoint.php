@@ -33,4 +33,22 @@ class GradePoint {
             echo "Error => {$e}";
         }
     }
+
+    public function getCGPA() {
+        try {
+            $db = new Database();
+            $courses = $db -> fetchAllStudentCourseDetails($this -> matricNumber);
+            $totalUnits = $this -> getCredits();
+            $totalCredits = 0;
+
+            foreach($courses as $course) {
+                $totalCredits += ($course['unit'] * $course['grade_point']);
+            }
+
+            return $totalCredits / $totalUnits;
+
+        } catch(PDOException $e) {
+
+        }
+    }
 }
