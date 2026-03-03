@@ -8,17 +8,17 @@ class GradePoint {
         $this -> matricNumber = $matricNumber;
     }
 
-    public function getCredits () {
-        $totalCredits = 0;
+    public function getTotalUnits () {
+        $totalUnits = 0;
         try {
             $db = new Database();
             $courseDetails = $db -> fetchAllStudentCourse($this -> matricNumber);
 
         foreach($courseDetails as $courseDetail) {
-            $totalCredits += $courseDetail['unit'];
+            $totalUnits += $courseDetail['unit'];
         }
 
-        return $totalCredits;
+        return $totalUnits;
         } catch(PDOException $e) {
             echo "Error => {$e}";
         }
@@ -38,11 +38,15 @@ class GradePoint {
         try {
             $db = new Database();
             $courses = $db -> fetchAllStudentCourseDetails($this -> matricNumber);
-            $totalUnits = $this -> getCredits();
+            $totalUnits = $this -> getTotalUnits();
             $totalCredits = 0;
 
             foreach($courses as $course) {
                 $totalCredits += ($course['unit'] * $course['grade_point']);
+            }
+
+            if($totalCredits === 0) {
+                return 0;
             }
 
             return $totalCredits / $totalUnits;

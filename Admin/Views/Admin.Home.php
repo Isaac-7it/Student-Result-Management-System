@@ -17,19 +17,9 @@ $students = $newDB -> fetchAllStudents();
     </div>
     <div class="bg-white p-sm mb-sm">
         <h5 class="mb-sm">Overview</h5>
-        <div class="grid">
-            <div class="bg-grey rounded-xl flex flex-col p-[8px]">
-                <span class="text-[12px] text-wrap flex-1 inline-block">Total Students</span>
-                <span class="font-stats text-3xl font-medium"><?= count($students) ?></span>
-            </div>
-            <div class="bg-grey rounded-xl flex flex-col p-[8px]">
-                <span class="text-[12px] text-wrap flex-1 inline-block">Cummu. GPA</span>
-                <span class="font-stats text-3xl font-medium">3.67</span>
-            </div>
-            <div class="bg-grey rounded-xl flex flex-col p-[8px]">
-                <span class="text-[12px] text-wrap flex-1 inline-block">Credits</span>
-                <span class="font-stats text-3xl font-medium">3.67</span>
-            </div>
+        <div class="bg-grey text-center rounded-xl flex flex-col p-[8px]">
+            <span class="text-[12px] text-wrap flex-1 inline-block">Total Students</span>
+            <span class="font-stats text-3xl font-medium"><?= count($students) ?></span>
         </div>
     </div>
     <div class="h-[50vh] overflow-x-scroll overflow-y-scroll">
@@ -61,7 +51,7 @@ $students = $newDB -> fetchAllStudents();
                         <td>
                             <form action="../Views/Admin.EditCourse.php" method="POST">
                                 <input type="hidden" name="matric" value="<?= $student["matric"] ?>">
-                                <button class="cursor-pointer" type="submit"><i class="fa-solid fa-trash"></i></button>
+                                <button class="cursor-pointer" type="submit"><i class="fa-solid fa-book"></i></button>
                             </form>
                         </td>
                     </tr>

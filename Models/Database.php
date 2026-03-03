@@ -163,14 +163,30 @@ class Database {
         return $students;
     }
 
-    public function fetchStudentDataByMiddlename($matric) {
+    public function fetchStudentDataByMiddlename($middleName) {
         $selectQuery = "SELECT * 
         FROM `students` 
         WHERE `middlename`=:middlename";
 
         $query = $this -> db -> prepare($selectQuery);
 
-        $query -> bindParam(":middlename", $matric, PDO::PARAM_STR);
+        $query -> bindParam(":middlename", $middleName, PDO::PARAM_STR);
+
+        $query -> execute();
+
+        $matchCases = $query -> fetchAll(PDO::FETCH_ASSOC);
+
+        return $matchCases;
+    }
+
+    public function fetchStudentGrades($matric) {
+        $selectQuery = "SELECT course_code, score, letter_grade, grade_point, unit
+        FROM `enrollments` 
+        WHERE `matric_number`=:matric";
+
+        $query = $this -> db -> prepare($selectQuery);
+
+        $query -> bindParam(":matric", $matric, PDO::PARAM_STR);
 
         $query -> execute();
 

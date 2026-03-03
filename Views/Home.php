@@ -38,8 +38,8 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
                 </span>
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
-                <span class="text-[12px] text-wrap flex-1 inline-block">Credits</span>
-                <span class="font-stats text-3xl font-medium"><?= $gradePoint -> getCredits() ?></span>
+                <span class="text-[12px] text-wrap flex-1 inline-block">Total Units</span>
+                <span class="font-stats text-3xl font-medium"><?= $gradePoint -> getTotalUnits() ?></span>
             </div>
         </div>
     </div>
@@ -50,7 +50,7 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
             <span>Last 4 semesters</span>
         </div>
         <div class="text-center mb-sm">
-            <a href="" class="py-xsm bg-blue-800 block w-full text-white rounded-md">View Grades</a>
+            <a href="../Views/Grade.php" class="py-xsm bg-blue-800 block w-full text-white rounded-md">View Grades</a>
         </div>
         <div class="text-center mb-sm">
             <a href="../Views/Enrollment.php" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Register Courses</a>
