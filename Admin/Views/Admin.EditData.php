@@ -9,6 +9,7 @@ if(isset($_POST['matric'])) {
     print_r($student);
 }
 $newEdit -> editData();
+
 ?>
 
 <head>
@@ -83,9 +84,6 @@ $newEdit -> editData();
             </div>
             <div class="mb-xmd">
                 <button type="submit" class="w-full bg-primary px-sm py-xsm rounded-input text-white">Update Data</button>
-            </div>
-            <div class="mb-xmd">
-                <a href='' type="submit" class="w-full bg-primary px-sm py-xsm rounded-input text-white">Delete Student</a>
             </div>
             <div class="">
                 <p class=""><a href="../Views/Admin.Home.php">Back to Home</a></p>

@@ -197,6 +197,9 @@
   .mb-xmd {
     margin-bottom: var(--spacing-xmd);
   }
+  .mb-xsm {
+    margin-bottom: var(--spacing-xsm);
+  }
   .block {
     display: block;
   }

@@ -60,6 +60,9 @@ $students = $newDB -> fetchAllStudents();
         </table>
     </div>
     <div class="text-center mb-sm">
+        <a href='../Views/Admin.Delete.php' class="py-xsm text-white block w-full bg-red-700 rounded-md" type="submit">Delete Student<i class="fa-solid fa-trash"></i></a>
+    </div>
+    <div class="text-center mb-sm">
         <a href="../Views/Admin.SignIn.php" class="py-xsm text-white block w-full bg-red-700 rounded-md">
            Log Out
         </a>
