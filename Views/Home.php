@@ -29,7 +29,7 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
         <div class="grid">
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Current GPA</span>
-                <span class="font-stats text-3xl font-medium"><?= (float) $gradePoint -> getCGPA() ?></span>
+                <span class="font-stats text-3xl font-medium"><?= (float) round($gradePoint -> getCGPA(), 2) ?></span>
             </div>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Courses Registered</span>
@@ -55,7 +55,10 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
         <div class="text-center mb-sm">
             <a href="../Views/Enrollment.php" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Register Courses</a>
         </div>
-           <div class="text-center mb-sm">
+        <div class="text-center mb-sm">
+            <a href="../Views/Remove.php" class="py-xsm text-dark-grey block w-full bg-white rounded-md">Remove Courses</a>
+        </div>
+        <div class="text-center mb-sm">
             <a href="" class="py-xsm text-dark-grey block w-full bg-white rounded-md">
                 <span></span>
                 <span>

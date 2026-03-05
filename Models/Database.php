@@ -243,11 +243,36 @@ class Database {
     }
 
     public function deleteStudentData($matric) {
+        // Delete Student Data
         $deleteQuery = "DELETE FROM `students` WHERE `matric`=:matric";
 
         $query = ($this -> db) -> prepare($deleteQuery);
         $query -> bindParam(":matric", $matric, PDO::PARAM_STR);
         $query -> execute();
+
+        // Delete Student Courses
+        $deleteQuery = "DELETE FROM `enrollments` 
+        WHERE `matric_number`=:matric";
+
+        $query = ($this -> db) -> prepare($deleteQuery);
+        $query -> bindParam(":matric", $matric, PDO::PARAM_STR);
+        $query -> execute();
+    }
+
+    public function deleteStudentCourse($matric, $course) {
+        $deleteQuery = "DELETE FROM `enrollments` 
+        WHERE `matric_number`=:matric AND `course_code`=:course";
+
+        $query = ($this -> db) -> prepare($deleteQuery);
+        $query -> bindParam(':matric', $matric, PDO::PARAM_STR);
+        $query -> bindParam(':course', $course, PDO::PARAM_STR);
+
+        $query -> execute();
+        if($query -> rowCount() > 0) {
+            return "{$query -> rowCount()} were affected";
+        } else {
+            return "No row was affected";
+        }
     }
 }
 
