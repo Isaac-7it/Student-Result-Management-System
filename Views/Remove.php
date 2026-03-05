@@ -23,6 +23,7 @@ include_once '../Controllers/Remove.php';
         </div>
         <button class="w-full bg-red-700 px-sm py-xsm rounded-input text-white" type="submit">Delete Course</button>
     </form>
+    <a href="../Views/Home.php" class="">Back to home</a>
 </main>
 <?php
 include_once '../Utility/footer.php';

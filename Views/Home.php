@@ -31,12 +31,12 @@ $gradePoint = new GradePoint($_SESSION["matricNumber"]);
                 <span class="text-[12px] text-wrap flex-1 inline-block">Current GPA</span>
                 <span class="font-stats text-3xl font-medium"><?= (float) round($gradePoint -> getCGPA(), 2) ?></span>
             </div>
-            <div class="bg-grey rounded-xl flex flex-col p-[8px]">
+            <a href="../Views/RegisteredCourses.php" class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Courses Registered</span>
                 <span class="font-stats text-3xl font-medium">
                     <?= $gradePoint -> getNumberOfCourses() ?>
                 </span>
-            </div>
+            </a>
             <div class="bg-grey rounded-xl flex flex-col p-[8px]">
                 <span class="text-[12px] text-wrap flex-1 inline-block">Total Units</span>
                 <span class="font-stats text-3xl font-medium"><?= $gradePoint -> getTotalUnits() ?></span>

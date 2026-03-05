@@ -6,7 +6,6 @@ class Delete {
     public $feedback;
 
     public function handleDelete() {
-        var_dump($_SERVER['REQUEST_METHOD'] === 'POST');
         if($_SERVER['REQUEST_METHOD'] === 'POST') {
             if(isset($_POST['matric'])) {
                 $this -> matric = htmlspecialchars(trim($_POST['matric']));
